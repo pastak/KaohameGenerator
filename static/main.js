@@ -6,11 +6,11 @@
      const request = new XMLHttpRequest()
      request.open("POST", '/generate')
      request.onreadystatechange = function () {
+       const resultArea = document.getElementById('resultArea')
        resultArea.innerHTML = '画像生成中...'
        if (request.readyState < 4) return
        const res = JSON.parse(request.responseText)
        if (res.results) {
-         const resultArea = document.getElementById('resultArea')
          resultArea.innerHTML = ''
          const dirname = res.md5
          res.results.forEach(function (result) {
