@@ -6,6 +6,7 @@
      const request = new XMLHttpRequest()
      request.open("POST", '/generate')
      request.onreadystatechange = function () {
+       resultArea.innerHTML = '画像生成中...'
        if (request.readyState < 4) return
        const res = JSON.parse(request.responseText)
        if (res.results) {
