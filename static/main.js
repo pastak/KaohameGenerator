@@ -5,9 +5,9 @@
      event.preventDefault()
      const request = new XMLHttpRequest()
      request.open("POST", '/generate')
+     const resultArea = document.getElementById('resultArea')
+     resultArea.innerHTML = '画像生成中...'
      request.onreadystatechange = function () {
-       const resultArea = document.getElementById('resultArea')
-       resultArea.innerHTML = '画像生成中...'
        if (request.readyState < 4) return
        const res = JSON.parse(request.responseText)
        if (res.results) {
