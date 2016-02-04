@@ -7,7 +7,9 @@ const path = require('path')
 const kaohameFileName = (process.argv[3]).split('/')[1]
 
 module.exports = (kaoImgFileName) => (face, _features) => (out) => {
-  const wstream = fs.createWriteStream('/tmp/result.png')
+  const randPath = '' +Date.now() + Math.floor(Math.random() * 100000)
+  require('mkdirp').sync('/tmp/' + randPath)
+  const wstream = fs.createWriteStream('/tmp/'+ randPath +'/result.png')
   wstream.write(out)
   wstream.end()
   // 顔の写った画像はリサイズしてサイズを合わせて顔をマスクする
@@ -27,7 +29,7 @@ module.exports = (kaoImgFileName) => (face, _features) => (out) => {
           kaoImgFileName, '-', '-compose', 'CopyOpacity', '-composite', 'png:-'
         ])
         imMask.pipe(imOpacityComposite).pipe(resize).closed((out) => {
-          const wstream = fs.createWriteStream('/tmp/result2.png')
+          const wstream = fs.createWriteStream('/tmp/' + randPath + '/result2.png')
           wstream.write(out)
           wstream.end()
           const x = face.x - thisFace.x * rate
@@ -35,18 +37,13 @@ module.exports = (kaoImgFileName) => (face, _features) => (out) => {
           const pos = `${x>=0?'+':''}${x}${y>=0?'+':''}${y}`
           const bgImg = new Convert(['-size', `${_features.width}x${_features.height}`, 'xc:none', 'png:-'])
           const imComposite = new Convert([
-            '-', '/tmp/result2.png', '-geometry', pos, '-composite', '-'
+            '-', '/tmp/' + randPath + '/result2.png', '-geometry', pos, '-composite', '-'
           ])
-          imComposite.closed((out) => {
-            const wstream = fs.createWriteStream('/tmp/result3.png')
-            wstream.write(out)
-            wstream.end()
-          })
           const imComposite2 = new Convert([
-            '/tmp/result.png', '-', '-gravity', 'northeast', '-composite', features.format+':-'
+            '/tmp/' + randPath + '/result.png', '-', '-gravity', 'northeast', '-composite', features.format+':-'
           ])
           bgImg.pipe(imComposite).pipe(imComposite2).closed((out) => {
-            const wstream = fs.createWriteStream('result.png')
+            const wstream = fs.createWriteStream(process.argv[4])
             wstream.write(out)
             wstream.end()
           })

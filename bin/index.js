@@ -1,12 +1,12 @@
 'use strict'
 // node . face kaohame
-const Convert = require('./libs/convert')
+const Convert = require('../libs/convert')
 const fs = require('fs')
 const cv = require('opencv')
 const path = require('path')
 const imagemagick = require('imagemagick')
-const maskCircle = require('./libs/maskCircle')
-const kaohameReciever = require('./libs/kaohameReciever')(path.resolve(__dirname, process.argv[2]))
+const maskCircle = require('../libs/maskCircle')
+const kaohameReciever = require('../libs/kaohameReciever')(path.resolve(__dirname, process.argv[2]))
 
 const kaohameFileName = path.resolve(__dirname, process.argv[3])
 // まず顔はめパネル画像を読み込んで顔部分を切り抜く
