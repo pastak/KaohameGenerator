@@ -1,0 +1,5 @@
+{
+  "name": "mask",
+  "image": "pastak/docker-heroku-nodejs-opencv",
+  "addons": []
+}
