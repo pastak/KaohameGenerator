@@ -2,13 +2,23 @@
 <html>
   <head>
     <meta charset='utf-8'>
+    <style>
+      img {
+        max-width: 150px;
+      }
+    </style>
   </head>
   <body>
     <h1>顔ハメ看板合成くん</h1>
-    <h2>ここからあなたの写真をアップロード！！！</h2>
+    <h2>Sample</h2>
+    <img src='https://i.gyazo.com/5f6b719ee5e5a379a36ce9389753317c.jpg' />
+    <img src='https://i.gyazo.com/aa0b63934e443abd871af27307f20007.jpg' />
+    <img src='https://i.gyazo.com/65b75b632dbf50a5ef7850e97198beab.jpg' />
+    <h2>ここからあなたの写真をアップロード！！！(JPEGに限る)</h2>
     <form id='form'>
       <input type='file' name='photo' id='photoUpload' accept='image/jpeg' />
     </form>
+    右クリックとかで保存可能！！！！！！！
     <div id='resultArea'></div>
     <script src='/main.js'></script>
   </body>
